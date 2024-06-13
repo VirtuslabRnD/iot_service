@@ -1,1 +1,2 @@
 *.lock  -diff
+cargo-bazel-lock.json  -diff
