@@ -47,7 +47,7 @@ smol_str = "0.2.0"
 streambed = { version = "0.9.1" }
 streambed-confidant = { version = "0.9.1" }
 streambed-logged = { version = "0.9.1" }
-test-log = "0.2.11"
+test-log = "=0.2.11"
 tokio = "1.23.0"
 tokio-stream = "0.1.14"
 tokio-util = "0.7.4"
