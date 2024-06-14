@@ -1,0 +1,85 @@
+load("@crate_index//:defs.bzl", "all_crate_deps")
+load("@rules_rust//cargo:defs.bzl", "cargo_build_script")
+load("@rules_rust//proto/prost:defs.bzl", "rust_prost_toolchain")
+load("@rules_rust//proto/protobuf:defs.bzl", "rust_proto_library")
+load("@rules_rust//rust:defs.bzl", "rust_binary", "rust_library", "rust_library_group")
+
+package(default_visibility = ["//visibility:public"])
+
+rust_library_group(
+    name = "prost_runtime",
+    deps = [
+        "@crate_index//:prost",
+    ],
+)
+
+rust_library_group(
+    name = "tonic_runtime",
+    deps = [
+        ":prost_runtime",
+        "@crate_index//:tonic",
+    ],
+)
+
+rust_prost_toolchain(
+    name = "prost_toolchain_impl",
+    prost_plugin = "@crate_index//:protoc-gen-prost__protoc-gen-prost",
+    prost_runtime = ":prost_runtime",
+    prost_types = "@crate_index//:prost-types",
+    proto_compiler = "@com_google_protobuf//:protoc",
+    tonic_plugin = "@crate_index//:protoc-gen-tonic__protoc-gen-tonic",
+    tonic_runtime = ":tonic_runtime",
+)
+
+toolchain(
+    name = "prost_toolchain",
+    toolchain = "prost_toolchain_impl",
+    toolchain_type = "@rules_rust//proto/prost:toolchain_type",
+)
+
+cargo_build_script(
+    name = "build_script",
+    srcs = ["build.rs"],
+    rustc_env = {
+        "CARGO_PKG_VERSION": "0.1.0",
+    },
+    # # Optional environment variables passed during build.rs execution.
+    # # Note that as the build script's working directory is not execroot,
+    # # execpath/location will return an absolute path, instead of a relative
+    # # one.
+    # build_script_env = {
+    #     "SOME_TOOL_OR_FILE": "$(execpath @tool//:binary)"
+    # },
+    # Optional data/tool dependencies
+    deps = [
+        ":proto_lib",
+        "@crate_index//:prost-build",
+    ],
+)
+
+rust_proto_library(
+    name = "proto_rs",
+    crate_name = "proto_rs",
+    tags = ["manual"],
+    deps = ["//iot-service-rs/backend/proto"],
+)
+
+rust_library(
+    name = "proto_lib",
+    srcs = ["build.rs"],
+    tags = ["manual"],
+    deps = [
+        ":proto_rs",
+        "@crate_index//:prost-build",
+    ],
+)
+
+rust_binary(
+    name = "backend",
+    srcs = glob(["src/*.rs"]),
+    edition = "2021",
+    deps = all_crate_deps(normal = True) + [
+        ":build_script",
+        "//iot-service-rs/model:iot_service_model",
+    ],
+)

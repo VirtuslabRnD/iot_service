@@ -1,5 +1,5 @@
 {
-  "checksum": "a2204fa34fa1f21ce687726a7e208822af516c7d3bb3b488f7b232b267928acb",
+  "checksum": "1afbff872328f964c7b43ca27b6c51a28c7fede8ea6c6e616e5771b3533a4589",
   "crates": {
     "addr2line 0.22.0": {
       "name": "addr2line",
@@ -4172,6 +4172,66 @@
       ],
       "license_file": "LICENSE-APACHE"
     },
+    "direct-cargo-bazel-deps 0.0.1": {
+      "name": "direct-cargo-bazel-deps",
+      "version": "0.0.1",
+      "package_url": null,
+      "repository": null,
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "direct_cargo_bazel_deps",
+            "crate_root": ".direct_cargo_bazel_deps.rs",
+            "srcs": {
+              "allow_empty": false,
+              "include": [
+                "**/*.rs"
+              ]
+            }
+          }
+        }
+      ],
+      "library_target_name": "direct_cargo_bazel_deps",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "deps": {
+          "common": [
+            {
+              "id": "prost 0.12.6",
+              "target": "prost"
+            },
+            {
+              "id": "prost-build 0.12.6",
+              "target": "prost_build"
+            },
+            {
+              "id": "prost-types 0.12.6",
+              "target": "prost_types"
+            },
+            {
+              "id": "protoc-gen-prost 0.3.1",
+              "target": "protoc_gen_prost"
+            },
+            {
+              "id": "protoc-gen-tonic 0.4.0",
+              "target": "protoc_gen_tonic"
+            },
+            {
+              "id": "tonic 0.10.2",
+              "target": "tonic"
+            }
+          ],
+          "selects": {}
+        },
+        "edition": "2018",
+        "version": "0.0.1"
+      },
+      "license": null,
+      "license_ids": [],
+      "license_file": null
+    },
     "displaydoc 0.2.4": {
       "name": "displaydoc",
       "version": "0.2.4",
@@ -7787,6 +7847,51 @@
       ],
       "license_file": "LICENSE"
     },
+    "heck 0.4.1": {
+      "name": "heck",
+      "version": "0.4.1",
+      "package_url": "https://github.com/withoutboats/heck",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/heck/0.4.1/download",
+          "sha256": "95505c38b4572b2d910cecb0281560f54b440a19336cbbcb27bf6ce6adc6f5a8"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "heck",
+            "crate_root": "src/lib.rs",
+            "srcs": {
+              "allow_empty": false,
+              "include": [
+                "**/*.rs"
+              ]
+            }
+          }
+        }
+      ],
+      "library_target_name": "heck",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "crate_features": {
+          "common": [
+            "default"
+          ],
+          "selects": {}
+        },
+        "edition": "2018",
+        "version": "0.4.1"
+      },
+      "license": "MIT OR Apache-2.0",
+      "license_ids": [
+        "Apache-2.0",
+        "MIT"
+      ],
+      "license_file": "LICENSE-APACHE"
+    },
     "heck 0.5.0": {
       "name": "heck",
       "version": "0.5.0",
@@ -10489,6 +10594,43 @@
         "compile_data_glob": [
           "**"
         ],
+        "crate_features": {
+          "common": [
+            "general",
+            "ioctl",
+            "no_std"
+          ],
+          "selects": {
+            "aarch64-unknown-linux-gnu": [
+              "elf",
+              "errno"
+            ],
+            "aarch64-unknown-nixos-gnu": [
+              "elf",
+              "errno"
+            ],
+            "arm-unknown-linux-gnueabi": [
+              "elf",
+              "errno"
+            ],
+            "armv7-unknown-linux-gnueabi": [
+              "elf",
+              "errno"
+            ],
+            "i686-unknown-linux-gnu": [
+              "elf",
+              "errno"
+            ],
+            "x86_64-unknown-linux-gnu": [
+              "elf",
+              "errno"
+            ],
+            "x86_64-unknown-nixos-gnu": [
+              "elf",
+              "errno"
+            ]
+          }
+        },
         "edition": "2021",
         "version": "0.4.14"
       },
@@ -13092,6 +13234,175 @@
         "Apache-2.0"
       ],
       "license_file": "LICENSE"
+    },
+    "protoc-gen-prost 0.3.1": {
+      "name": "protoc-gen-prost",
+      "version": "0.3.1",
+      "package_url": "https://github.com/neoeinstein/protoc-gen-prost",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/protoc-gen-prost/0.3.1/download",
+          "sha256": "e810847124cb9a1d4ccefb1aabc80ccaba67f4af047e60dc1c0f2e145494bb85",
+          "patch_args": [
+            "-p1"
+          ]
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "protoc_gen_prost",
+            "crate_root": "src/lib.rs",
+            "srcs": {
+              "allow_empty": false,
+              "include": [
+                "**/*.rs"
+              ]
+            }
+          }
+        },
+        {
+          "Binary": {
+            "crate_name": "protoc-gen-prost",
+            "crate_root": "src/main.rs",
+            "srcs": {
+              "allow_empty": false,
+              "include": [
+                "**/*.rs"
+              ]
+            }
+          }
+        }
+      ],
+      "library_target_name": "protoc_gen_prost",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "deps": {
+          "common": [
+            {
+              "id": "once_cell 1.19.0",
+              "target": "once_cell"
+            },
+            {
+              "id": "prost 0.12.6",
+              "target": "prost"
+            },
+            {
+              "id": "prost-build 0.12.6",
+              "target": "prost_build"
+            },
+            {
+              "id": "prost-types 0.12.6",
+              "target": "prost_types"
+            },
+            {
+              "id": "regex 1.10.5",
+              "target": "regex"
+            }
+          ],
+          "selects": {}
+        },
+        "edition": "2021",
+        "version": "0.3.1"
+      },
+      "license": "Apache-2.0",
+      "license_ids": [
+        "Apache-2.0"
+      ],
+      "license_file": null
+    },
+    "protoc-gen-tonic 0.4.0": {
+      "name": "protoc-gen-tonic",
+      "version": "0.4.0",
+      "package_url": "https://github.com/neoeinstein/protoc-gen-prost",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/protoc-gen-tonic/0.4.0/download",
+          "sha256": "ddbdc75b24f73447021807b854cbba3c76aa686ff5599ec9fdaff5585f2a9748"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "protoc_gen_tonic",
+            "crate_root": "src/lib.rs",
+            "srcs": {
+              "allow_empty": false,
+              "include": [
+                "**/*.rs"
+              ]
+            }
+          }
+        },
+        {
+          "Binary": {
+            "crate_name": "protoc-gen-tonic",
+            "crate_root": "src/main.rs",
+            "srcs": {
+              "allow_empty": false,
+              "include": [
+                "**/*.rs"
+              ]
+            }
+          }
+        }
+      ],
+      "library_target_name": "protoc_gen_tonic",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "deps": {
+          "common": [
+            {
+              "id": "heck 0.4.1",
+              "target": "heck"
+            },
+            {
+              "id": "prettyplease 0.2.20",
+              "target": "prettyplease"
+            },
+            {
+              "id": "prost 0.12.6",
+              "target": "prost"
+            },
+            {
+              "id": "prost-build 0.12.6",
+              "target": "prost_build"
+            },
+            {
+              "id": "prost-types 0.12.6",
+              "target": "prost_types"
+            },
+            {
+              "id": "protoc-gen-prost 0.3.1",
+              "target": "protoc_gen_prost"
+            },
+            {
+              "id": "regex 1.10.5",
+              "target": "regex"
+            },
+            {
+              "id": "syn 2.0.66",
+              "target": "syn"
+            },
+            {
+              "id": "tonic-build 0.11.0",
+              "target": "tonic_build"
+            }
+          ],
+          "selects": {}
+        },
+        "edition": "2021",
+        "version": "0.4.0"
+      },
+      "license": "Apache-2.0",
+      "license_ids": [
+        "Apache-2.0"
+      ],
+      "license_file": null
     },
     "quote 1.0.36": {
       "name": "quote",
@@ -17429,6 +17740,78 @@
       ],
       "license_file": "LICENSE"
     },
+    "tonic-build 0.11.0": {
+      "name": "tonic-build",
+      "version": "0.11.0",
+      "package_url": "https://github.com/hyperium/tonic",
+      "repository": {
+        "Http": {
+          "url": "https://static.crates.io/crates/tonic-build/0.11.0/download",
+          "sha256": "be4ef6dd70a610078cb4e338a0f79d06bc759ff1b22d2120c2ff02ae264ba9c2"
+        }
+      },
+      "targets": [
+        {
+          "Library": {
+            "crate_name": "tonic_build",
+            "crate_root": "src/lib.rs",
+            "srcs": {
+              "allow_empty": false,
+              "include": [
+                "**/*.rs"
+              ]
+            }
+          }
+        }
+      ],
+      "library_target_name": "tonic_build",
+      "common_attrs": {
+        "compile_data_glob": [
+          "**"
+        ],
+        "crate_features": {
+          "common": [
+            "default",
+            "prost",
+            "prost-build",
+            "transport"
+          ],
+          "selects": {}
+        },
+        "deps": {
+          "common": [
+            {
+              "id": "prettyplease 0.2.20",
+              "target": "prettyplease"
+            },
+            {
+              "id": "proc-macro2 1.0.85",
+              "target": "proc_macro2"
+            },
+            {
+              "id": "prost-build 0.12.6",
+              "target": "prost_build"
+            },
+            {
+              "id": "quote 1.0.36",
+              "target": "quote"
+            },
+            {
+              "id": "syn 2.0.66",
+              "target": "syn"
+            }
+          ],
+          "selects": {}
+        },
+        "edition": "2021",
+        "version": "0.11.0"
+      },
+      "license": "MIT",
+      "license_ids": [
+        "MIT"
+      ],
+      "license_file": "LICENSE"
+    },
     "tower 0.4.13": {
       "name": "tower",
       "version": "0.4.13",
@@ -21398,8 +21781,12 @@
       "license_file": "LICENSE"
     }
   },
-  "binary_crates": [],
+  "binary_crates": [
+    "protoc-gen-prost 0.3.1",
+    "protoc-gen-tonic 0.4.0"
+  ],
   "workspace_members": {
+    "direct-cargo-bazel-deps 0.0.1": "iot-service-rs",
     "iot-service 0.1.0": "iot-service-rs/backend",
     "iot-service-model 0.1.0": "iot-service-rs/model",
     "iot-service-ui 0.1.0": "iot-service-rs/frontend"
@@ -21887,6 +22274,9 @@
     "postcard 1.0.8",
     "prost 0.12.6",
     "prost-build 0.12.6",
+    "prost-types 0.12.6",
+    "protoc-gen-prost 0.3.1",
+    "protoc-gen-tonic 0.4.0",
     "rand 0.8.5",
     "scopeguard 1.2.0",
     "serde 1.0.203",
